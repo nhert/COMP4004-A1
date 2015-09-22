@@ -112,6 +112,23 @@ public class Poker {
 		else
 			return false;
 	}
+	
+	public boolean HasFlush(Hand h){
+		String theSuit = h.getCard(0).getSuit();
+		int countSameSuit = 0;
+		
+		for(int x = 0; x< 5; x++){
+			if(h.getCard(x).getSuit().contains(theSuit)){
+				countSameSuit++;
+			}
+		}
+		
+		if(countSameSuit == 5)
+			return true;
+		else
+			return false;
+		
+	}
 }
 
 

@@ -43,6 +43,7 @@ public class TestPoker extends TestCase{
 	public void testPairs(){
 		Poker p = new Poker();
 		Hand h = new Hand();
+		//one pair
 		h.add(new Card(2, "Spades"));
 		h.add(new Card(2, "Hearts"));
 		h.add(new Card(3, "Clubs"));
@@ -51,6 +52,7 @@ public class TestPoker extends TestCase{
 		assertTrue(p.HasPair(h, 1));
 		assertFalse(p.HasPair(h, 2));
 		
+		//two pair
 		h = new Hand();
 		h.add(new Card(2, "Spades"));
 		h.add(new Card(2, "Hearts"));
@@ -60,6 +62,7 @@ public class TestPoker extends TestCase{
 		assertTrue(p.HasPair(h, 2));
 		assertFalse(p.HasPair(h, 1));
 		
+		//no pairs
 		h = new Hand();
 		h.add(new Card(2, "Spades"));
 		h.add(new Card(3, "Hearts"));
@@ -74,6 +77,7 @@ public class TestPoker extends TestCase{
 	public void testNumKind(){
 		Poker p = new Poker();
 		Hand h = new Hand();
+		//three of a kind
 		h.add(new Card(2, "Spades"));
 		h.add(new Card(2, "Hearts"));
 		h.add(new Card(2, "Clubs"));
@@ -82,6 +86,7 @@ public class TestPoker extends TestCase{
 		assertTrue(p.HasNOfAKind(h, 3));
 		assertFalse(p.HasNOfAKind(h, 4));
 		
+		//four of a kind
 		h = new Hand();
 		h.add(new Card(2, "Spades"));
 		h.add(new Card(2, "Hearts"));
@@ -91,6 +96,7 @@ public class TestPoker extends TestCase{
 		assertTrue(p.HasNOfAKind(h, 4));
 		assertFalse(p.HasNOfAKind(h, 3));
 		
+		//only a pair
 		h = new Hand();
 		h.add(new Card(2, "Spades"));
 		h.add(new Card(2, "Hearts"));
@@ -138,6 +144,27 @@ public class TestPoker extends TestCase{
 		h.add(new Card(11, "Clubs"));
 		h.add(new Card(10, "Hearts"));
 		assertTrue(p.HasStraight(h));
+	}
+	
+	public void testRegularFlush(){
+		Poker p = new Poker();
+		Hand h = new Hand();
+		//regular flush
+		h.add(new Card(2, "Spades"));
+		h.add(new Card(3, "Spades"));
+		h.add(new Card(2, "Spades"));
+		h.add(new Card(5, "Spades"));
+		h.add(new Card(10, "Spades"));
+		assertTrue(p.HasFlush(h));
+		
+		//almost flush, off by one
+		h = new Hand();
+		h.add(new Card(2, "Spades"));
+		h.add(new Card(3, "Spades"));
+		h.add(new Card(2, "Spades"));
+		h.add(new Card(5, "Spades"));
+		h.add(new Card(10, "Hearts"));
+		assertFalse(p.HasFlush(h));
 	}
 	
 	
