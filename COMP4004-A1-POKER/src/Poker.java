@@ -167,7 +167,37 @@ public class Poker {
 			return false;
 	}
 	
+	public boolean HasStraightFromN(Hand h, int pivot){
+		ArrayList<Integer> cards = new ArrayList<Integer>();
+		for(int x = 0; x<5; x++){
+			cards.add(h.getCard(x).getRank());
+		}
+		
+		int countIter = 1;
+		
+		for(int i = 0; i<4; i++){
+			if(cards.contains(pivot-1)){
+				pivot--;
+				countIter++;
+			}
+		}
+
+		if(countIter == 5)
+			return true;
+		else
+			return false;
+	}
 	
+	public boolean HasRoyalFlush(Hand h){
+		if(GetHighCard(h) == 14){
+			if(HasStraightFromN(h,14) && HasFlush(h))
+				return true;
+			else
+				return false;
+		}else{
+			return false;
+		}
+	}
 }
 
 

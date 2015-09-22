@@ -227,5 +227,44 @@ public class TestPoker extends TestCase{
 		assertFalse(p.HasStraightFlush(h));
 	}
 	
+	public void testRoyalFlush(){
+		Poker p = new Poker();
+		Hand h = new Hand();
+		//a Royal flush!
+		h.add(new Card(14, "Spades"));
+		h.add(new Card(13, "Spades"));
+		h.add(new Card(12, "Spades"));
+		h.add(new Card(11, "Spades"));
+		h.add(new Card(10, "Spades"));
+		assertTrue(p.HasRoyalFlush(h));
+		
+		h = new Hand();
+		//a straight and flush with no ace
+		h.add(new Card(9, "Spades"));
+		h.add(new Card(13, "Spades"));
+		h.add(new Card(12, "Spades"));
+		h.add(new Card(11, "Spades"));
+		h.add(new Card(10, "Spades"));
+		assertFalse(p.HasRoyalFlush(h));
+		
+		h = new Hand();
+		//a straight with ace with no flush
+		h.add(new Card(14, "Hearts"));
+		h.add(new Card(13, "Spades"));
+		h.add(new Card(12, "Spades"));
+		h.add(new Card(11, "Clubs"));
+		h.add(new Card(10, "Spades"));
+		assertFalse(p.HasRoyalFlush(h));
+		
+		h = new Hand();
+		//a flush with ace but no straight
+		h.add(new Card(14, "Spades"));
+		h.add(new Card(13, "Spades"));
+		h.add(new Card(12, "Spades"));
+		h.add(new Card(11, "Spades"));
+		h.add(new Card(9, "Spades"));
+		assertFalse(p.HasRoyalFlush(h));
+	}
+	
 	
 }
