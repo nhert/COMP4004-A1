@@ -7,11 +7,19 @@ public class Hand {
 	}
 	
 	public Card getCard(int i){
-		return cards.get(i);
+		if(cards.size() >= i){
+			return cards.get(i);
+		}else{
+			return null;
+		}	
 	}
 	
 	public void add(Card newCard){
-		cards.add(newCard);
+		if(cards.size() == 5){
+			return;
+		}else{
+			cards.add(newCard);
+		}
 	}
 	
 	private ArrayList<Card> cards;
