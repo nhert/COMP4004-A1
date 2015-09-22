@@ -127,8 +127,40 @@ public class Poker {
 			return true;
 		else
 			return false;
-		
 	}
+	
+	public boolean HasFullHouse(Hand h){
+		ArrayList<Integer> cards = new ArrayList<Integer>();
+		ArrayList<Integer> alreadyChecked = new ArrayList<Integer>();
+		boolean foundThreeKind = false;
+		boolean foundPair = false;
+		for(int x = 0; x<5; x++){
+			cards.add(h.getCard(x).getRank());
+		}
+		
+		//first try to find three of a kind
+		for(int i = 0; i<5; i++){
+			if(Collections.frequency(cards, cards.get(i)) == 3   &&  !alreadyChecked.contains(cards.get(i))){
+				alreadyChecked.add(cards.get(i));
+				foundThreeKind = true;
+			}
+		}
+		
+		//then try to find a pair out of the non three of a kind numbers
+		for(int i = 0; i<5; i++){
+			if(Collections.frequency(cards, cards.get(i)) == 2   &&  !alreadyChecked.contains(cards.get(i))){
+				alreadyChecked.add(cards.get(i));
+				foundPair = true;
+			}
+		}
+		
+		if(foundThreeKind && foundPair)
+			return true;
+		else
+			return false;
+	}
+	
+	
 }
 
 

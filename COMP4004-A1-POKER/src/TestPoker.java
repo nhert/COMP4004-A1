@@ -167,5 +167,35 @@ public class TestPoker extends TestCase{
 		assertFalse(p.HasFlush(h));
 	}
 	
+	public void testFullHouse(){
+		Poker p = new Poker();
+		Hand h = new Hand();
+		//a full house
+		h.add(new Card(2, "Spades"));
+		h.add(new Card(2, "Hearts"));
+		h.add(new Card(2, "Clubs"));
+		h.add(new Card(3, "Spades"));
+		h.add(new Card(3, "Spades"));
+		assertTrue(p.HasFullHouse(h));
+		
+		//just three of a kind with no pair
+		h = new Hand();
+		h.add(new Card(2, "Spades"));
+		h.add(new Card(2, "Hearts"));
+		h.add(new Card(2, "Clubs"));
+		h.add(new Card(5, "Spades"));
+		h.add(new Card(6, "Spades"));
+		assertFalse(p.HasFullHouse(h));
+		
+		//just pair with no three of a kind
+		h = new Hand();
+		h.add(new Card(2, "Spades"));
+		h.add(new Card(2, "Hearts"));
+		h.add(new Card(3, "Clubs"));
+		h.add(new Card(4, "Spades"));
+		h.add(new Card(5, "Spades"));
+		assertFalse(p.HasFullHouse(h));		
+	}
+	
 	
 }
