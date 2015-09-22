@@ -160,6 +160,13 @@ public class Poker {
 			return false;
 	}
 	
+	public boolean HasStraightFlush(Hand h){
+		if(HasStraight(h) && HasFlush(h))
+			return true;
+		else
+			return false;
+	}
+	
 	
 }
 
