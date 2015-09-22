@@ -101,5 +101,44 @@ public class TestPoker extends TestCase{
 		assertFalse(p.HasNOfAKind(h, 3));
 	}
 	
+	public void testRegularStraight(){
+		Poker p = new Poker();
+		Hand h = new Hand();
+		//normal straight
+		h.add(new Card(2, "Spades"));
+		h.add(new Card(3, "Hearts"));
+		h.add(new Card(4, "Clubs"));
+		h.add(new Card(5, "Clubs"));
+		h.add(new Card(6, "Hearts"));
+		assertTrue(p.HasStraight(h));
+		
+		//almost a straight but off by 1
+		h = new Hand();
+		h.add(new Card(2, "Spades"));
+		h.add(new Card(3, "Hearts"));
+		h.add(new Card(4, "Clubs"));
+		h.add(new Card(5, "Clubs"));
+		h.add(new Card(10, "Hearts"));
+		assertFalse(p.HasStraight(h));
+		
+		//descending order
+		h = new Hand();
+		h.add(new Card(10, "Spades"));
+		h.add(new Card(9, "Hearts"));
+		h.add(new Card(8, "Clubs"));
+		h.add(new Card(7, "Clubs"));
+		h.add(new Card(6, "Hearts"));
+		assertTrue(p.HasStraight(h));
+		
+		//face cards
+		h = new Hand();
+		h.add(new Card(14, "Spades"));
+		h.add(new Card(13, "Hearts"));
+		h.add(new Card(12, "Clubs"));
+		h.add(new Card(11, "Clubs"));
+		h.add(new Card(10, "Hearts"));
+		assertTrue(p.HasStraight(h));
+	}
+	
 	
 }

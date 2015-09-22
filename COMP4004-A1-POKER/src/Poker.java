@@ -83,6 +83,35 @@ public class Poker {
 		else
 			return false;
 	}
+	
+	public boolean HasStraight(Hand h){
+		ArrayList<Integer> cards = new ArrayList<Integer>();
+		for(int x = 0; x<5; x++){
+			cards.add(h.getCard(x).getRank());
+		}
+		
+		int countIter = 0;
+		int pivot = 0;
+		
+		for(int x = 0; x<5; x++){
+			pivot = cards.get(x);
+			countIter = 1;
+			for(int i = 0; i<4; i++){
+				if(cards.contains(pivot+1)){
+					pivot++;
+					countIter++;
+				}
+			}
+			if(countIter == 5)
+				break;
+		}
+		
+		
+		if(countIter == 5)
+			return true;
+		else
+			return false;
+	}
 }
 
 
