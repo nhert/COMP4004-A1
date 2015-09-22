@@ -1,4 +1,5 @@
 import java.util.ArrayList;
+import java.util.Collections;
 
 /*Note of Rankings in Poker:
  * High Card: 1
@@ -34,4 +35,35 @@ public class Poker {
 		}
 		return currentHigh;
 	}
+	
+	public boolean HasPair(Hand h, int numPairs){
+		ArrayList<Integer> cards = new ArrayList<Integer>();
+		ArrayList<Integer> alreadyChecked = new ArrayList<Integer>();
+		int numberFound = 0;
+		
+		for(int x = 0; x<5; x++){
+			cards.add(h.getCard(x).getRank());
+		}
+		
+		for(int i = 0; i<5; i++){
+			//if there is a pair for this number, and we haven't already found a pair for it then...
+			if(Collections.frequency(cards, cards.get(i)) == 2   &&  !alreadyChecked.contains(cards.get(i))){
+				//add the number to the list of numbers that were recorded as having a pair
+				alreadyChecked.add(cards.get(i));
+				numberFound++;
+			}
+		}
+		
+		if(numberFound == numPairs)
+			return true;
+		else
+			return false;
+	}
 }
+
+
+
+
+
+
+
