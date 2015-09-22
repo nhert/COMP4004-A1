@@ -70,5 +70,36 @@ public class TestPoker extends TestCase{
 		assertFalse(p.HasPair(h, 1));
 	}
 	
+	//test a hand for having a certain number of a "kind"
+	public void testNumKind(){
+		Poker p = new Poker();
+		Hand h = new Hand();
+		h.add(new Card(2, "Spades"));
+		h.add(new Card(2, "Hearts"));
+		h.add(new Card(2, "Clubs"));
+		h.add(new Card(3, "Clubs"));
+		h.add(new Card(11, "Hearts"));
+		assertTrue(p.HasNOfAKind(h, 3));
+		assertFalse(p.HasNOfAKind(h, 4));
+		
+		h = new Hand();
+		h.add(new Card(2, "Spades"));
+		h.add(new Card(2, "Hearts"));
+		h.add(new Card(2, "Clubs"));
+		h.add(new Card(2, "Clubs"));
+		h.add(new Card(11, "Hearts"));
+		assertTrue(p.HasNOfAKind(h, 4));
+		assertFalse(p.HasNOfAKind(h, 3));
+		
+		h = new Hand();
+		h.add(new Card(2, "Spades"));
+		h.add(new Card(2, "Hearts"));
+		h.add(new Card(3, "Clubs"));
+		h.add(new Card(4, "Clubs"));
+		h.add(new Card(11, "Hearts"));
+		assertFalse(p.HasNOfAKind(h, 4));
+		assertFalse(p.HasNOfAKind(h, 3));
+	}
+	
 	
 }
