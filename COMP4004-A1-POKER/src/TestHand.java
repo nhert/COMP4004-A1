@@ -48,4 +48,21 @@ public class TestHand extends TestCase{
 		Hand h = new Hand();
 		assertNull(h.getCard(3));
 	}
+	
+	public void testHandCapacity(){
+		Hand h = new Hand();
+		h.add(new Card());
+		h.add(new Card());
+		h.add(new Card());
+		h.add(new Card());
+		h.add(new Card());
+		assertEquals(5, h.cardCount());
+		h.add(new Card());
+		assertEquals(5, h.cardCount());
+	}
 }
+
+
+
+
+

@@ -14,6 +14,10 @@ public class Hand {
 		}	
 	}
 	
+	public int cardCount(){
+		return cards.size();
+	}
+	
 	public void add(Card newCard){
 		if(cards.size() == 5){
 			return;
