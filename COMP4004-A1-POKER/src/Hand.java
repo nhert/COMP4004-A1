@@ -14,6 +14,13 @@ public class Hand {
 		}	
 	}
 	
+	public void setHand(Hand h){
+		cards.clear();
+		for(int x = 0; x<h.cardCount(); x++){
+			cards.add(h.getCard(x));
+		}
+	}
+	
 	public int cardCount(){
 		return cards.size();
 	}

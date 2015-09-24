@@ -14,7 +14,6 @@ public class TestPoker extends TestCase{
 	public void testCreatePokerGame(){
 		Poker p = new Poker();
 		assertNotNull(p);
-		assertEquals(0, p.getPokerRanking());
 	}
 	
 	//test the high card function in the poker class
@@ -160,7 +159,7 @@ public class TestPoker extends TestCase{
 		//almost flush, off by one
 		h = new Hand();
 		h.add(new Card(2, "Spades"));
-		h.add(new Card(3, "Spades"));
+		h.add(new Card(3, "Clubs"));
 		h.add(new Card(2, "Spades"));
 		h.add(new Card(5, "Spades"));
 		h.add(new Card(10, "Hearts"));
@@ -266,5 +265,364 @@ public class TestPoker extends TestCase{
 		assertFalse(p.HasRoyalFlush(h));
 	}
 	
+	public void testHandRankings(){
+		Poker p = new Poker();
+		Hand h = new Hand();
+		//royal flush = 10
+		h.add(new Card(14, "Spades"));
+		h.add(new Card(13, "Spades"));
+		h.add(new Card(12, "Spades"));
+		h.add(new Card(11, "Spades"));
+		h.add(new Card(10, "Spades"));
+		//assertEquals(10,p.getPokerRanking(h));
+		
+		h = new Hand();
+		//straight flush = 9
+		h.add(new Card(9, "Spades"));
+		h.add(new Card(13, "Spades"));
+		h.add(new Card(12, "Spades"));
+		h.add(new Card(11, "Spades"));
+		h.add(new Card(10, "Spades"));
+		//assertEquals(9,p.getPokerRanking(h));
+		
+		h = new Hand();
+		//four of kind = 8
+		h.add(new Card(9, "Spades"));
+		h.add(new Card(9, "Diamonds"));
+		h.add(new Card(9, "Hearts"));
+		h.add(new Card(9, "Spades"));
+		h.add(new Card(10, "Clubs"));
+		//assertEquals(8,p.getPokerRanking(h));
+		
+		h = new Hand();
+		//full house = 7
+		h.add(new Card(9, "Spades"));
+		h.add(new Card(9, "Hearts"));
+		h.add(new Card(9, "Spades"));
+		h.add(new Card(10, "Diamonds"));
+		h.add(new Card(10, "Spades"));
+		//assertEquals(7,p.getPokerRanking(h));
+		
+		h = new Hand();
+		//Flush = 6
+		h.add(new Card(9, "Spades"));
+		h.add(new Card(5, "Spades"));
+		h.add(new Card(12, "Spades"));
+		h.add(new Card(2, "Spades"));
+		h.add(new Card(10, "Spades"));
+		//assertEquals(6,p.getPokerRanking(h));
+		
+		h = new Hand();
+		//straight = 5
+		h.add(new Card(2, "Spades"));
+		h.add(new Card(3, "Hearts"));
+		h.add(new Card(4, "Spades"));
+		h.add(new Card(5, "Diamonds"));
+		h.add(new Card(6, "Spades"));
+		//assertEquals(5,p.getPokerRanking(h));
+		
+		h = new Hand();
+		//three of kind = 4
+		h.add(new Card(9, "Spades"));
+		h.add(new Card(9, "Hearts"));
+		h.add(new Card(9, "Spades"));
+		h.add(new Card(12, "Diamonds"));
+		h.add(new Card(10, "Spades"));
+		//assertEquals(4,p.getPokerRanking(h));
+		
+		h = new Hand();
+		//two pair = 3
+		h.add(new Card(9, "Spades"));
+		h.add(new Card(9, "Hearts"));
+		h.add(new Card(10, "Spades"));
+		h.add(new Card(10, "Diamonds"));
+		h.add(new Card(5, "Spades"));
+		//assertEquals(3,p.getPokerRanking(h));
+		
+		h = new Hand();
+		//pair = 2
+		h.add(new Card(9, "Spades"));
+		h.add(new Card(9, "Hearts"));
+		h.add(new Card(5, "Spades"));
+		h.add(new Card(12, "Diamonds"));
+		h.add(new Card(10, "Spades"));
+		//assertEquals(2,p.getPokerRanking(h));
+		
+		h = new Hand();
+		//high card default = 1
+		h.add(new Card(9, "Spades"));
+		h.add(new Card(2, "Hearts"));
+		h.add(new Card(5, "Spades"));
+		h.add(new Card(12, "Diamonds"));
+		h.add(new Card(10, "Spades"));
+		//assertEquals(1,p.getPokerRanking(h));
+	}
 	
+	public void testGameResolution(){
+		Game g = new Game();
+		Poker p = new Poker();
+		//TESTING WHERE PLAYERS EACH HAVE A PAIR
+		g.addPlayer();
+		g.addPlayer();
+		//player 1 has a pair of 5s
+		g.getPlayer(0).add(new Card(5, "Hearts"));
+		g.getPlayer(0).add(new Card(5, "Diamonds"));
+		g.getPlayer(0).add(new Card(10, "Clubs"));
+		g.getPlayer(0).add(new Card(9, "Hearts"));
+		g.getPlayer(0).add(new Card(8, "Hearts"));
+		//player 2 has a pair of 5s as well
+		g.getPlayer(1).add(new Card(5, "Hearts"));
+		g.getPlayer(1).add(new Card(5, "Diamonds"));
+		g.getPlayer(1).add(new Card(10, "Hearts"));
+		g.getPlayer(1).add(new Card(9, "Hearts"));
+		g.getPlayer(1).add(new Card(7, "Hearts"));
+		p.FindWinner(g);
+		
+		//TESTING WHERE PLAYERS EACH HAVE JUST A HIGH CARD
+		g = new Game();
+		g.addPlayer();
+		g.addPlayer();
+		//player 1 has a pair of 5s
+		g.getPlayer(0).add(new Card(2, "Hearts"));
+		g.getPlayer(0).add(new Card(5, "Diamonds"));
+		g.getPlayer(0).add(new Card(10, "Clubs"));
+		g.getPlayer(0).add(new Card(9, "Hearts"));
+		g.getPlayer(0).add(new Card(8, "Hearts"));
+		//player 2 has a pair of 5s as well
+		g.getPlayer(1).add(new Card(2, "Hearts"));
+		g.getPlayer(1).add(new Card(5, "Diamonds"));
+		g.getPlayer(1).add(new Card(10, "Hearts"));
+		g.getPlayer(1).add(new Card(9, "Hearts"));
+		g.getPlayer(1).add(new Card(7, "Hearts"));
+		p.FindWinner(g);
+		
+		//TESTING WHERE PLAYERS EACH HAVE TWO PAIR
+				g = new Game();
+				g.addPlayer();
+				g.addPlayer();
+				//player 1 has a pair of 5s
+				g.getPlayer(0).add(new Card(2, "Hearts"));
+				g.getPlayer(0).add(new Card(2, "Diamonds"));
+				g.getPlayer(0).add(new Card(5, "Clubs"));
+				g.getPlayer(0).add(new Card(5, "Hearts"));
+				g.getPlayer(0).add(new Card(8, "Hearts"));
+				//player 2 has a pair of 5s as well
+				g.getPlayer(1).add(new Card(2, "Hearts"));
+				g.getPlayer(1).add(new Card(2, "Diamonds"));
+				g.getPlayer(1).add(new Card(5, "Hearts"));
+				g.getPlayer(1).add(new Card(5, "Hearts"));
+				g.getPlayer(1).add(new Card(7, "Hearts"));
+				p.FindWinner(g);
+				
+				//TESTING WHERE PLAYERS EACH HAVE THREE OF A KIND SAME VALUE (shouldnt be possible by current rules)
+				g = new Game();
+				g.addPlayer();
+				g.addPlayer();
+				//player 1 has a pair of 5s
+				g.getPlayer(0).add(new Card(2, "Hearts"));
+				g.getPlayer(0).add(new Card(2, "Diamonds"));
+				g.getPlayer(0).add(new Card(2, "Clubs"));
+				g.getPlayer(0).add(new Card(5, "Hearts"));
+				g.getPlayer(0).add(new Card(4, "Hearts"));
+				//player 2 has a pair of 5s as well
+				g.getPlayer(1).add(new Card(2, "Hearts"));
+				g.getPlayer(1).add(new Card(2, "Diamonds"));
+				g.getPlayer(1).add(new Card(2, "Hearts"));
+				g.getPlayer(1).add(new Card(5, "Hearts"));
+				g.getPlayer(1).add(new Card(3, "Hearts"));
+				p.FindWinner(g);
+				
+				//TESTING WHERE PLAYERS EACH HAVE STRAIGHT (this should always resolve to a tie if they have the same high card)
+				g = new Game();
+				g.addPlayer();
+				g.addPlayer();
+				//player 1 has a pair of 5s
+				g.getPlayer(0).add(new Card(2, "Hearts"));
+				g.getPlayer(0).add(new Card(3, "Diamonds"));
+				g.getPlayer(0).add(new Card(4, "Clubs"));
+				g.getPlayer(0).add(new Card(5, "Hearts"));
+				g.getPlayer(0).add(new Card(6, "Hearts"));
+				//player 2 has a pair of 5s as well
+				g.getPlayer(1).add(new Card(2, "Hearts"));
+				g.getPlayer(1).add(new Card(3, "Diamonds"));
+				g.getPlayer(1).add(new Card(4, "Hearts"));
+				g.getPlayer(1).add(new Card(5, "Hearts"));
+				g.getPlayer(1).add(new Card(6, "Hearts"));
+				p.FindWinner(g);
+				
+				//TESTING WHERE PLAYERS EACH HAVE FLUSH
+				g = new Game();
+				g.addPlayer();
+				g.addPlayer();
+				//player 1 has a pair of 5s
+				g.getPlayer(0).add(new Card(10, "Diamonds"));
+				g.getPlayer(0).add(new Card(9, "Diamonds"));
+				g.getPlayer(0).add(new Card(8, "Diamonds"));
+				g.getPlayer(0).add(new Card(7, "Diamonds"));
+				g.getPlayer(0).add(new Card(4, "Diamonds"));
+				//player 2 has a pair of 5s as well
+				g.getPlayer(1).add(new Card(10, "Hearts"));
+				g.getPlayer(1).add(new Card(9, "Hearts"));
+				g.getPlayer(1).add(new Card(8, "Hearts"));
+				g.getPlayer(1).add(new Card(7, "Hearts"));
+				g.getPlayer(1).add(new Card(3, "Hearts"));
+				p.FindWinner(g);
+				
+				//TESTING WHERE PLAYERS EACH HAVE FULL HOUSE
+				g = new Game();
+				g.addPlayer();
+				g.addPlayer();
+				//player 1 has a pair of 5s
+				g.getPlayer(0).add(new Card(9, "Hearts"));
+				g.getPlayer(0).add(new Card(9, "Diamonds"));
+				g.getPlayer(0).add(new Card(9, "Clubs"));
+				g.getPlayer(0).add(new Card(8, "Hearts"));
+				g.getPlayer(0).add(new Card(8, "Hearts"));
+				//player 2 has a pair of 5s as well
+				g.getPlayer(1).add(new Card(9, "Hearts"));
+				g.getPlayer(1).add(new Card(9, "Diamonds"));
+				g.getPlayer(1).add(new Card(9, "Hearts"));
+				g.getPlayer(1).add(new Card(7, "Hearts"));
+				g.getPlayer(1).add(new Card(7, "Hearts"));
+				p.FindWinner(g);
+				
+				//TESTING WHERE PLAYERS EACH HAVE FOUR OF KIND (this shouldnt realistically happen, one player will always have a higher hand)
+				g = new Game();
+				g.addPlayer();
+				g.addPlayer();
+				//player 1 has a pair of 5s
+				g.getPlayer(0).add(new Card(2, "Hearts"));
+				g.getPlayer(0).add(new Card(2, "Diamonds"));
+				g.getPlayer(0).add(new Card(2, "Clubs"));
+				g.getPlayer(0).add(new Card(2, "Hearts"));
+				g.getPlayer(0).add(new Card(8, "Hearts"));
+				//player 2 has a pair of 5s as well
+				g.getPlayer(1).add(new Card(2, "Hearts"));
+				g.getPlayer(1).add(new Card(2, "Diamonds"));
+				g.getPlayer(1).add(new Card(2, "Hearts"));
+				g.getPlayer(1).add(new Card(2, "Hearts"));
+				g.getPlayer(1).add(new Card(7, "Hearts"));
+				p.FindWinner(g);
+				
+				//TESTING WHERE PLAYERS EACH HAVE STRAIGHT FLUSH (again, should always result in a tie!)
+				g = new Game();
+				g.addPlayer();
+				g.addPlayer();
+				//player 1 has a pair of 5s
+				g.getPlayer(0).add(new Card(10, "Hearts"));
+				g.getPlayer(0).add(new Card(9, "Hearts"));
+				g.getPlayer(0).add(new Card(8, "Hearts"));
+				g.getPlayer(0).add(new Card(7, "Hearts"));
+				g.getPlayer(0).add(new Card(6, "Hearts"));
+				//player 2 has a pair of 5s as well
+				g.getPlayer(1).add(new Card(10, "Diamonds"));
+				g.getPlayer(1).add(new Card(9, "Diamonds"));
+				g.getPlayer(1).add(new Card(8, "Diamonds"));
+				g.getPlayer(1).add(new Card(7, "Diamonds"));
+				g.getPlayer(1).add(new Card(6, "Diamonds"));
+				p.FindWinner(g);
+				
+				//TESTING WHERE PLAYERS EACH HAVE ROYAL FLUSH (SHOULD RESULT IN TIE)
+				g = new Game();
+				g.addPlayer();
+				g.addPlayer();
+				//player 1 has a pair of 5s
+				g.getPlayer(0).add(new Card(14, "Diamonds"));
+				g.getPlayer(0).add(new Card(13, "Diamonds"));
+				g.getPlayer(0).add(new Card(12, "Diamonds"));
+				g.getPlayer(0).add(new Card(11, "Diamonds"));
+				g.getPlayer(0).add(new Card(10, "Diamonds"));
+				//player 2 has a pair of 5s as well
+				g.getPlayer(1).add(new Card(14, "Hearts"));
+				g.getPlayer(1).add(new Card(13, "Hearts"));
+				g.getPlayer(1).add(new Card(12, "Hearts"));
+				g.getPlayer(1).add(new Card(11, "Hearts"));
+				g.getPlayer(1).add(new Card(10, "Hearts"));
+				p.FindWinner(g);
+				
+				
+				
+				//TESTING WHERE THERE IS A TIE AMONG 4 PLAYERS
+				g = new Game();
+				g.addPlayer();
+				g.addPlayer();
+				g.addPlayer();
+				g.addPlayer();
+				//player 1 has a pair of 5s
+				g.getPlayer(0).add(new Card(14, "Diamonds"));
+				g.getPlayer(0).add(new Card(13, "Diamonds"));
+				g.getPlayer(0).add(new Card(12, "Diamonds"));
+				g.getPlayer(0).add(new Card(11, "Diamonds"));
+				g.getPlayer(0).add(new Card(10, "Diamonds"));
+				//player 1 has a pair of 5s
+				g.getPlayer(1).add(new Card(10, "Diamonds"));
+				g.getPlayer(1).add(new Card(10, "Diamonds"));
+				g.getPlayer(1).add(new Card(10, "Diamonds"));
+				g.getPlayer(1).add(new Card(9, "Diamonds"));
+				g.getPlayer(1).add(new Card(8, "Diamonds"));
+				//player 1 has a pair of 5s
+				g.getPlayer(2).add(new Card(10, "Diamonds"));
+				g.getPlayer(2).add(new Card(10, "Diamonds"));
+				g.getPlayer(2).add(new Card(10, "Diamonds"));
+				g.getPlayer(2).add(new Card(9, "Diamonds"));
+				g.getPlayer(2).add(new Card(8, "Diamonds"));
+				//player 1 has a pair of 5s
+				g.getPlayer(3).add(new Card(6, "Diamonds"));
+				g.getPlayer(3).add(new Card(7, "Hearts"));
+				g.getPlayer(3).add(new Card(2, "Diamonds"));
+				g.getPlayer(3).add(new Card(9, "Diamonds"));
+				g.getPlayer(3).add(new Card(10, "Diamonds"));
+				p.FindWinner(g);
+				
+				
+				//TESTING WHERE THERE IS A TIE AMONG 4 PLAYERS with 2 ties!
+				g = new Game();
+				g.addPlayer();
+				g.addPlayer();
+				g.addPlayer();
+				g.addPlayer();
+				//player 1 has a pair of 5s
+				g.getPlayer(0).add(new Card(14, "Diamonds"));
+				g.getPlayer(0).add(new Card(13, "Diamonds"));
+				g.getPlayer(0).add(new Card(12, "Diamonds"));
+				g.getPlayer(0).add(new Card(11, "Diamonds"));
+				g.getPlayer(0).add(new Card(10, "Diamonds"));
+				//player 1 has a pair of 5s
+				g.getPlayer(1).add(new Card(10, "Diamonds"));
+				g.getPlayer(1).add(new Card(10, "Diamonds"));
+				g.getPlayer(1).add(new Card(10, "Diamonds"));
+				g.getPlayer(1).add(new Card(9, "Diamonds"));
+				g.getPlayer(1).add(new Card(8, "Diamonds"));
+				//player 1 has a pair of 5s
+				g.getPlayer(2).add(new Card(10, "Diamonds"));
+				g.getPlayer(2).add(new Card(10, "Diamonds"));
+				g.getPlayer(2).add(new Card(10, "Diamonds"));
+				g.getPlayer(2).add(new Card(9, "Diamonds"));
+				g.getPlayer(2).add(new Card(8, "Diamonds"));
+				//player 1 has a pair of 5s
+				g.getPlayer(3).add(new Card(14, "Diamonds"));
+				g.getPlayer(3).add(new Card(13, "Diamonds"));
+				g.getPlayer(3).add(new Card(12, "Diamonds"));
+				g.getPlayer(3).add(new Card(11, "Diamonds"));
+				g.getPlayer(3).add(new Card(10, "Diamonds"));
+				p.FindWinner(g);
+	}
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

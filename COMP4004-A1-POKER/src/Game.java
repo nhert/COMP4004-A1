@@ -22,11 +22,19 @@ public class Game {
 				pCount = 4;
 			if(pCount < 2)
 				pCount = 2;
-			System.out.println("\nStarting Round with (" + pCount + ") Players.");
+			System.out.println("\nStarting Round with (" + pCount + ") Players.\n");
 			
+			Deck d = new Deck();
+			Game g = new Game();
+			Poker p = new Poker();
 			
+			for(int x = 0; x<pCount; x++){
+				g.addPlayer();
+				for(int i = 0; i<5; i++)
+					g.getPlayer(x).add(d.getACard());
+			}
 			
-			
+			p.FindWinner(g);
 			round ++;
 		}
 	}
