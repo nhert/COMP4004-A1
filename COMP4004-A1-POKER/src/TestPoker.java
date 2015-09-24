@@ -11,6 +11,19 @@ public class TestPoker extends TestCase{
 		super(sname);
 	}
 	
+	public void runAll(){
+		testCreatePokerGame();
+		testHighCard();
+		testPairs();
+		testNumKind();
+		testRegularStraight();
+		testRegularFlush();
+		testFullHouse();
+		testStraightFlush();
+		testRoyalFlush();
+		testGameResolution();
+	}
+	
 	public void testCreatePokerGame(){
 		Poker p = new Poker();
 		assertNotNull(p);

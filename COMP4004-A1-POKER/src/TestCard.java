@@ -6,6 +6,10 @@ public class TestCard extends TestCase{
 		super(sname);
 	}
 	
+	public void runAll(){
+		testRankLowest();
+	}
+	
 	public void testRankLowest(){
 		Card c = new Card();
 		assertEquals(2, c.getRank());

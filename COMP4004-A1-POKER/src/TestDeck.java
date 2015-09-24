@@ -6,7 +6,13 @@ public class TestDeck extends TestCase{
 		super(sname);
 	}
 	
-	//test the creation of a new deck
+	public void runAll(){
+		testNewDeck();
+		testEveryCardInDeck();
+		testEveryCardInDeckUnique();
+	}
+	
+
 	public void testNewDeck(){
 		Deck d = new Deck();
 	}

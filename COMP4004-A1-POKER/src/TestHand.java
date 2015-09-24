@@ -5,6 +5,14 @@ public class TestHand extends TestCase{
 		super(sname);
 	}
 	
+	public void runAll(){
+		testHandOneCardLowest();
+		testHandTwoCards();
+		testHandWithSuited();
+		testNoHand();
+		testHandCapacity();
+	}
+	
 	//assure that card values are stored properly for at least 1 card
 	public void testHandOneCardLowest(){
 		Hand h = new Hand(); // default case where there are no parms

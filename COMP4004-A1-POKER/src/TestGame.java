@@ -6,6 +6,12 @@ public class TestGame extends TestCase{
 		super(sname);
 	}
 	
+	public void runAll(){
+		testOnePlayer();
+		testTwoPlayers();
+		testPlayerCapacity();
+	}
+	
 	//test a game that only has one player functions properly
 	public void testOnePlayer(){
 		Game g = new Game();
