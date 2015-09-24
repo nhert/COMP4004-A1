@@ -287,7 +287,7 @@ public class TestPoker extends TestCase{
 		h.add(new Card(12, "Spades"));
 		h.add(new Card(11, "Spades"));
 		h.add(new Card(10, "Spades"));
-		//assertEquals(10,p.getPokerRanking(h));
+		assertEquals(119,p.getPokerRanking(h));
 		
 		h = new Hand();
 		//straight flush = 9
@@ -296,7 +296,7 @@ public class TestPoker extends TestCase{
 		h.add(new Card(12, "Spades"));
 		h.add(new Card(11, "Spades"));
 		h.add(new Card(10, "Spades"));
-		//assertEquals(9,p.getPokerRanking(h));
+		assertEquals(117,p.getPokerRanking(h));
 		
 		h = new Hand();
 		//four of kind = 8
@@ -305,7 +305,7 @@ public class TestPoker extends TestCase{
 		h.add(new Card(9, "Hearts"));
 		h.add(new Card(9, "Spades"));
 		h.add(new Card(10, "Clubs"));
-		//assertEquals(8,p.getPokerRanking(h));
+		assertEquals(100,p.getPokerRanking(h));
 		
 		h = new Hand();
 		//full house = 7
@@ -314,7 +314,7 @@ public class TestPoker extends TestCase{
 		h.add(new Card(9, "Spades"));
 		h.add(new Card(10, "Diamonds"));
 		h.add(new Card(10, "Spades"));
-		//assertEquals(7,p.getPokerRanking(h));
+		assertEquals(87,p.getPokerRanking(h));
 		
 		h = new Hand();
 		//Flush = 6
@@ -323,7 +323,7 @@ public class TestPoker extends TestCase{
 		h.add(new Card(12, "Spades"));
 		h.add(new Card(2, "Spades"));
 		h.add(new Card(10, "Spades"));
-		//assertEquals(6,p.getPokerRanking(h));
+		assertEquals(77,p.getPokerRanking(h));
 		
 		h = new Hand();
 		//straight = 5
@@ -332,7 +332,7 @@ public class TestPoker extends TestCase{
 		h.add(new Card(4, "Spades"));
 		h.add(new Card(5, "Diamonds"));
 		h.add(new Card(6, "Spades"));
-		//assertEquals(5,p.getPokerRanking(h));
+		assertEquals(58,p.getPokerRanking(h));
 		
 		h = new Hand();
 		//three of kind = 4
@@ -341,7 +341,7 @@ public class TestPoker extends TestCase{
 		h.add(new Card(9, "Spades"));
 		h.add(new Card(12, "Diamonds"));
 		h.add(new Card(10, "Spades"));
-		//assertEquals(4,p.getPokerRanking(h));
+		assertEquals(48,p.getPokerRanking(h));
 		
 		h = new Hand();
 		//two pair = 3
@@ -350,7 +350,7 @@ public class TestPoker extends TestCase{
 		h.add(new Card(10, "Spades"));
 		h.add(new Card(10, "Diamonds"));
 		h.add(new Card(5, "Spades"));
-		//assertEquals(3,p.getPokerRanking(h));
+		assertEquals(36,p.getPokerRanking(h));
 		
 		h = new Hand();
 		//pair = 2
@@ -359,7 +359,7 @@ public class TestPoker extends TestCase{
 		h.add(new Card(5, "Spades"));
 		h.add(new Card(12, "Diamonds"));
 		h.add(new Card(10, "Spades"));
-		//assertEquals(2,p.getPokerRanking(h));
+		assertEquals(22,p.getPokerRanking(h));
 		
 		h = new Hand();
 		//high card default = 1
@@ -368,7 +368,7 @@ public class TestPoker extends TestCase{
 		h.add(new Card(5, "Spades"));
 		h.add(new Card(12, "Diamonds"));
 		h.add(new Card(10, "Spades"));
-		//assertEquals(1,p.getPokerRanking(h));
+		assertEquals(12,p.getPokerRanking(h));
 	}
 	
 	public void testGameResolution(){
